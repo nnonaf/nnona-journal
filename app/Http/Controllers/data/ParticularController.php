@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Journals;
-
-
-class Journal extends Controller
+class ParticularController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,7 @@ class Journal extends Controller
      */
     public function index()
     {
-        return view('welcome');
-
+        //
     }
 
     /**
@@ -28,14 +24,7 @@ class Journal extends Controller
      */
     public function create()
     {
-
-        
-        $journal = new Journals;
-
-        $journal->name = 'Sales';
-        $journal->save();
-
-       
+        //
     }
 
     /**

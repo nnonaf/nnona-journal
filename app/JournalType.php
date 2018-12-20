@@ -8,4 +8,10 @@ class JournalType extends Model
 {
     //
     protected $table = 'journalType';
+
+    protected $fillable = [
+
+        'name'        
+       ];
+
 }

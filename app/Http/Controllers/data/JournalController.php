@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\JournalType;
 
-class Particular extends Controller
+
+class JournalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class Particular extends Controller
      */
     public function index()
     {
-        //
+        $journal = JournalType::all();
+        return view('journal')->with(['journal' => $journal]);
     }
 
     /**
@@ -24,7 +27,10 @@ class Particular extends Controller
      */
     public function create()
     {
-        //
+
+      
+
+       
     }
 
     /**

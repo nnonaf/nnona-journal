@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Data;
+namespace App\Http\Controllers\data;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\JournalType;
 
-class JournalType extends Controller
+
+class JournalTypeController extends Controller
+
+
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class JournalType extends Controller
      */
     public function index()
     {
-        //
+       $journal = JournalType::all();
+        return view('settings')->with(['journal' => $journal]);
+
     }
 
     /**
@@ -35,7 +43,27 @@ class JournalType extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newTypeOfJournal = $request->message;
+        if($newTypeOfJournal === null){
+            return response()->json(false);
+
+        }
+
+        //saving the new journal 
+
+        $newJournal = new JournalType;
+
+        //checking if name is already exiting  before saving
+        $checkJournal = JournalType::where('name',strtolower($request->message))->get();
+     
+
+        if(count($checkJournal) === 0){
+            $newJournal->name = strtolower($request->message);
+            $newJournal->user_id = auth()->user()->id;
+            $save =  $newJournal->save();
+        }
+           return response()->json(true);
+       
     }
 
     /**
@@ -69,7 +97,7 @@ class JournalType extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $deleteJournal = $request->message;
     }
 
     /**
@@ -80,6 +108,9 @@ class JournalType extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $journal = JournalType::find($id);
+        $journal->delete();
+        return response()->json(true);
     }
 }

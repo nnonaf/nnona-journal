@@ -14,11 +14,12 @@
 use Illuminate\Auth\Middleware\Authenticate;
 // Route::resource('/', 'Data\Journal')->middleware('auth');
 
-
-
-Route::resource('/', 'Data\Journal');
+Route::resource('/journal', 'Data\JournalController')->middleware('auth');
+Route::resource('/settings', 'Data\JournalTypeController')->middleware('auth');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+
