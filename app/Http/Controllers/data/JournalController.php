@@ -5,6 +5,8 @@ namespace App\Http\Controllers\data;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JournalType;
+use App\Customer;
+use App\Journals;
 
 
 class JournalController extends Controller
@@ -41,7 +43,84 @@ class JournalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+        $customer = $_POST["customer"];
+        $journalType = $_POST["journalType"];
+
+        if(empty( $customer) || empty( $journalType)){
+           
+            header('Location: ' .url('/journal?error=1'));
+            exit;
+        }
+
+        // SAVING OF CUSTOMER OR GENERATING CUSTOMER ID
+         
+        $newCustomer =  new Customer;
+        $checkCustomer = Customer::where('name',strtolower($customer))->get();
+        if(count($checkCustomer) === 0){
+             
+            $newCustomer->name = strtolower($customer);
+            $newCustomer->user_id = auth()->user()->id;
+            $checkCustomer =  $newCustomer->save();
+        }
+          
+       
+
+        // getting customer's id
+         
+        if(count($checkCustomer) == 1){
+            $savedCustomer = Customer::where('name',strtolower($customer))->get();
+        }
+
+        foreach ($savedCustomer as $customer) {
+            $customer =  $customer->id;
+        }
+         
+
+        //saving the transaction
+          $name = 1;
+       
+        if(isset($_POST["count"])){
+            for($i = 0 ; $i  <  $_POST["count"]; ++$i){
+                $name = $name +  $i;   
+                $goods = "goods_".$name;
+                $amount = "amount_".$name;
+                // saving only none empty fileds
+                              
+                if(!empty($_POST[$goods]) && !empty($_POST[$amount])){
+                    $this->saveJournal(auth()->user()->id,$customer,$_POST[$goods],$journalType,$_POST[$amount]);
+                }
+
+            }
+           
+      
+        }else{
+
+            if(!empty($_POST["goods_1"]) && !empty($_POST["amount_1"])){
+              
+               $see = $this->saveJournal(auth()->user()->id,$customer,$_POST["goods_1"],$journalType,$_POST["amount_1"]);
+                             
+            }
+           
+  
+
+        }
+
+        return back()->withInput();
+   
+        
+    }
+
+    private function saveJournal($user_id,$customer,$particular,$journalType, $amount){
+
+           $journal = new Journals;
+           $journal->user_id = $user_id;
+           $journal->customer_id = $customer;
+           $journal->particular = $particular;
+           $journal->journalType_id = $journalType;
+           $journal->amount = $amount;
+
+           return $journal->save();
     }
 
     /**

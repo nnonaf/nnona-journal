@@ -19,6 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/journal.css') }}" rel="stylesheet">
     
+    
 </head>
 <body>
     <div id="app">
@@ -100,5 +101,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/journal.js') }}" defer></script>
+    <script src="{{ asset('js/transaction.js') }}" defer></script>
+    
 </body>
 </html>

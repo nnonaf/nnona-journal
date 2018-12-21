@@ -13,24 +13,26 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                   <form>
+                   <form  method="POST" action="{{ url('journal') }}">
+                    @csrf
                         <div class="container">
+                            <div id="journalForm"></div>
                             <div class="row">
                                 <div class="col-8">
                                 
-                                <input type="text" class="form-control" placeholder="First name">
+                                <input type="text"  name="customer" class="form-control" placeholder="customer name" required>
                                     <label for="inputState"> <small>Customer's Name</small></label>
                                 </div>
                                 <div class="col-4">
                                 
                                     
-                                    <select id="inputState" class="form-control">
+                                    <select id="inputState"  name="journalType" class="form-control" required>
                                         <option></option>
                                         @if(count($journal) > 0)
 
 
                                                 @for($i = 0; $i < count($journal); ++$i )
-                                                    <option  value="{{ucwords($journal[$i]->name)}}">{{ucwords($journal[$i]->name)}}</option>
+                                                    <option  value="{{$journal[$i]->id}}">{{ucwords($journal[$i]->name)}}</option>
 
                                                 @endfor
                                             @else
@@ -45,31 +47,45 @@
                             <hr>
                             <hr>
                             
-                            <div class="row">
+                            <div class="row" id="addNew">
                                 <div class="col-8">
                                 
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="goods_1" class="form-control" placeholder="" required>
                                     <label for="inputState"> <small>Goods</small></label>
                                 </div>
                                 <div class="col-4">
-                                    <input type="text" class="form-control" placeholder="N20000">
+                                    <input type="number" name="amount_1" class="form-control" placeholder="N20000" required>
                                     <label for="inputState"> <small>Amount</small></label>
                                     
                                                                     
                                 </div>
+                                  {{--  <div class="col-8">
+                                
+                                    <input type="text"  name="goods_2" class="form-control" placeholder="">
+                                    <label for="inputState"> <small>Goods</small></label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number"  name="amount_2" class="form-control" placeholder="N20000">
+                                    <label for="inputState"> <small>Amount</small></label>
+                                    
+                                                                    
+                                </div>  --}}
+                                 {{--  <div id="addNew" ></div>  --}}
                             </div>
-
-
-
-
-
+                           
+                            
                           <hr>
-                          <button type="button" class="btn btn-secondary btn-sm">Submit</button>
+                          <div class="row">
+                                <div class="col-10">
+                                   <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button"  onclick="addNewSlip()" class="btn btn-secondary btn-sm">Add</button>
+                                </div>
+                           </div>
+
+                                    
                          
-
-
-
-
                         </div>
                      </form>   
 

@@ -17,7 +17,9 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable()->index();
             $table->integer('customer_id')->unsigned()->nullable()->index();
-            $table->integer('particular_id')->unsigned()->nullable()->index();
+            $table->string('particular')->nullable()->index();
+            $table->integer('journalType_id')->unsigned()->nullable()->index();
+            
             $table->integer('amount');;
             $table->timestamps();
         });

@@ -13,6 +13,61 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div class="container">
+                            <form   id="idForm">
+                             {{--  @csrf  --}}
+                            <div class="row">
+                                <div class="col-6">
+                                 <select id="inputState"  name="journalType" class="form-control">
+                                        <option></option>
+                                         @if(count($data["journals"]) > 0)
+
+
+                                                @for($i = 0; $i < count($data["journals"]); ++$i )
+                                                    <option  value="{{$data['journals'][$i]->id}}">{{ucwords($data["journals"][$i]->name)}}</option>
+
+                                                @endfor
+                                            @else
+
+                                            @endif
+                                    </select>
+                                    <label for="inputState"> <small>Customer's Name</small></label>
+                                </div>
+                                <div class="col-6">
+                                
+                                    
+                                    <select id="inputState"  name="customer" class="form-control">
+                                        <option></option>
+                                        @if(count($data["journals"]) > 0)
+
+
+                                                @for($i = 0; $i < count($data["customers"]); ++$i )
+                                                    <option  value="{{$data['customers'][$i]->id}}">{{ucwords($data["customers"][$i]->name)}}</option>
+
+                                                @endfor
+                                            @else
+
+                                            @endif
+                                       
+                                    </select>
+                                    <label for="inputState"><small>Select Journla</small></label>
+                                    
+                                
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-10">
+                                   {{--  <button type="submit" class="btn btn-outline-secondary">Submit</button>  --}}
+                                </div>
+                                <div class="col-2">
+                                    <button type="submit"  class="btn btn-secondary btn-sm">Get</button>
+                                </div>
+                           </div>
+
+                          </form> 
+
+                            <hr>
+                            </div>
 
                    <table class="table table-striped">
                     <thead>

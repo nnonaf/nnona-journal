@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JournalType;
+use App\Customer;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $journal = JournalType::all();
+        $customer = Customer::all();
+
+        $data = [];
+        $data["journals"] = $journal;
+        $data["customers"] = $customer;
+        
+        return view('home')->with(['data' => $data]);
+    }
+
+
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       
+      //getting journal according to post request 
+
+      
+
+           return response()->json($_POST);
+       
     }
 }

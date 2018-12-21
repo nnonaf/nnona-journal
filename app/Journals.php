@@ -8,10 +8,14 @@ class Journals extends Model
 {
     //
 
-    protected $table = 'journaltype';
+    protected $table = 'transactions';
     protected $fillable = [
 
-       'name'
+       'user_id',
+       'customer_id',
+       'particular_id',
+       'journalType_id',
+       'amount'
        ];
 
 }
