@@ -15,9 +15,10 @@ class CreateJournalTypeTable extends Migration
     {
         Schema::create('journalType', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('name')->unique();
             $table->boolean('is_ban')->default(0);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -30,5 +31,7 @@ class CreateJournalTypeTable extends Migration
     public function down()
     {
         Schema::dropIfExists('journalType');
+       
+
     }
 }

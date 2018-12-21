@@ -14,4 +14,6 @@ class JournalType extends Model
         'name'        
        ];
 
+ 
+
 }

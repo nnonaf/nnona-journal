@@ -21,6 +21,7 @@ function addNewSlip(){
 
 $("#idForm").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
+    $("#journalTable").html("")
 
     var formData = new FormData(document.getElementsByName('yourForm')[0]);// yourForm: form selector      
     $.ajax({
@@ -33,7 +34,13 @@ $("#idForm").submit(function(e) {
            contentType: false,
            success: function(data)
            {
-              console.log(data); 
+             let number = 1
+            for(let i = 0; i < data.length; ++i){
+                number = number + i
+
+                $("#journalTable").append("<tr><th scope='row'>"+ number+"</th><td>"+ data[i].customerName+"</td><td>"+ data[i].particular+"</td><td>"+ data[i].amount+"</td><td></td></tr>")
+            }
+           
            }
          });
 

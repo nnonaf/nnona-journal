@@ -8,5 +8,5 @@ class Particular extends Model
 {
     //
 
-    protected $table = 'particular'
+    protected $table = 'particular';
 }

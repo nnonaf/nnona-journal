@@ -18,4 +18,5 @@ class Journals extends Model
        'amount'
        ];
 
+
 }

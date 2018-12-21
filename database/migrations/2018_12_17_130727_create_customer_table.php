@@ -15,9 +15,10 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->string('name')->unique();
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('customerName')->unique();
             $table->boolean('is_ban')->default(0);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

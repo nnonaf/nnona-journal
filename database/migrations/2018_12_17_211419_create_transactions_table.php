@@ -19,6 +19,11 @@ class CreateTransactionsTable extends Migration
             $table->integer('customer_id')->unsigned()->nullable()->index();
             $table->string('particular')->nullable()->index();
             $table->integer('journalType_id')->unsigned()->nullable()->index();
+            $table->foreign('user_id') ->references('id')->on('users') ->onDelete('cascade');
+            $table->foreign('customer_id') ->references('id')->on('customer') ->onDelete('cascade');
+            $table->foreign('journalType_id') ->references('id')->on('journalType') ->onDelete('cascade');
+            
+            
             
             $table->integer('amount');;
             $table->timestamps();

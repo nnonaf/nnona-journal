@@ -56,10 +56,10 @@ class JournalController extends Controller
         // SAVING OF CUSTOMER OR GENERATING CUSTOMER ID
          
         $newCustomer =  new Customer;
-        $checkCustomer = Customer::where('name',strtolower($customer))->get();
+        $checkCustomer = Customer::where('customerName',strtolower($customer))->get();
         if(count($checkCustomer) === 0){
              
-            $newCustomer->name = strtolower($customer);
+            $newCustomer->customerName = strtolower($customer);
             $newCustomer->user_id = auth()->user()->id;
             $checkCustomer =  $newCustomer->save();
         }
@@ -69,7 +69,7 @@ class JournalController extends Controller
         // getting customer's id
          
         if(count($checkCustomer) == 1){
-            $savedCustomer = Customer::where('name',strtolower($customer))->get();
+            $savedCustomer = Customer::where('customerName',strtolower($customer))->get();
         }
 
         foreach ($savedCustomer as $customer) {

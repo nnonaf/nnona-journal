@@ -17,9 +17,9 @@
                             <form   id="idForm">
                              {{--  @csrf  --}}
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                  <select id="inputState"  name="journalType" class="form-control">
-                                        <option></option>
+                                        <option value=''></option>
                                          @if(count($data["journals"]) > 0)
 
 
@@ -33,16 +33,16 @@
                                     </select>
                                     <label for="inputState"> <small>Customer's Name</small></label>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                 
                                     
                                     <select id="inputState"  name="customer" class="form-control">
-                                        <option></option>
+                                        <option value=''></option>
                                         @if(count($data["journals"]) > 0)
 
 
                                                 @for($i = 0; $i < count($data["customers"]); ++$i )
-                                                    <option  value="{{$data['customers'][$i]->id}}">{{ucwords($data["customers"][$i]->name)}}</option>
+                                                    <option  value="{{$data['customers'][$i]->id}}">{{ucwords($data["customers"][$i]->customerName)}}</option>
 
                                                 @endfor
                                             @else
@@ -54,6 +54,10 @@
                                     
                                 
                                 </div>
+                                 <div class="col-4">
+                                     <input type="date" name="trasactionDate" class="form-control"/>
+                                     <label for="inputState"><small>Select date</small></label>
+                                 </div>
                             </div>
                              <div class="row">
                                 <div class="col-10">
@@ -79,28 +83,8 @@
                         <th scope="col">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                         <td>the Bird</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                         <td>the Bird</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                         <td>the Bird</td>
-                        </tr>
+                    <tbody id="journalTable">
+                       
                     </tbody>
                  </table>
                 </div>
