@@ -19,7 +19,10 @@ class JournalController extends Controller
     public function index()
     {
         $journal = JournalType::all();
-        return view('journal')->with(['journal' => $journal]);
+        return view('journal')->with(['journal' => $journal,
+        'title' =>"Journal title"
+        
+        ]);
     }
 
     /**

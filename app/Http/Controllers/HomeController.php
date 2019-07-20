@@ -36,7 +36,10 @@ class HomeController extends Controller
         $data["journals"] = $journal;
         $data["customers"] = $customer;
         
-        return view('home')->with(['data' => $data]);
+        return view('home')->with(['data' => $data,
+        'title' =>"Journal title"
+        
+        ]);
     }
 
 
